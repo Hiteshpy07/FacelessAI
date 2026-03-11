@@ -14,20 +14,13 @@ const [prompt, setPrompt] = useState('');
   console.log(prompt)
   return (
     <div className="w-full max-w-xl p-6">
-      {/* Label & Header */}
+     
       <div className="flex items-center justify-between mb-3 px-1">
-        <label className="flex items-center gap-2 text-sm font-semibold text-blue-400">
-          {/* <HiSparkles className="animate-pulse" /> */}
-          {/* <span>AI Prompt Engineer</span> */}
+        <label className="flex items-center gap-2 text-sm font-semibold text-blue-400">        
         </label>
-        {/* <span className="text-[10px] uppercase tracking-tighter text-slate-500">
-          v1.0 Stable
-        </span> */}
       </div>
 
-      {/* Textarea Container */}
       <div className="relative group">
-        {/* Background Glow Effect */}
         <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl blur opacity-20 group-focus-within:opacity-40 transition duration-500"></div>
         
         <div className="relative">
@@ -42,7 +35,6 @@ const [prompt, setPrompt] = useState('');
                        placeholder:text-slate-600 resize-none transition-all duration-300"
           />
           
-          {/* Bottom Bar inside Textarea */}
           <div className="absolute bottom-3 right-3 flex items-center gap-4">
             <span className={`text-[10px] font-mono ${prompt.length >= maxLength ? 'text-red-500' : 'text-slate-500'}`}>
               {prompt.length}/{maxLength}
@@ -60,10 +52,6 @@ const [prompt, setPrompt] = useState('');
         </div>
       </div>
 
-      {/* Helper Footer */}
-      {/* <p className="mt-3 text-[11px] text-slate-500 italic px-1">
-        Press <kbd className="font-sans border border-slate-700 px-1 rounded bg-slate-900">Cmd + Enter</kbd> to submit quickly.
-      </p> */}
     </div>
   )
 }

@@ -3,6 +3,7 @@ import React from 'react'
 import  { useState } from 'react';
 import { HiChevronDown } from 'react-icons/hi';
 import TextArea from './TextArea';
+import Style from './Style';
 
 
 function Page() {
@@ -57,6 +58,8 @@ function Page() {
       {optionselected=="Custom Prompt" && //IMPORTANT WAY HWO TO RENDER CONDITIONAL COMPOENTS 
       <TextArea/>
       }
+
+      <Style/>
     </div>
   )
 }
