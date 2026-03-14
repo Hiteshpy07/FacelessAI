@@ -3,10 +3,11 @@ import React from 'react'
 import { useState } from 'react';
 import { HiSparkles, HiOutlineTerminal } from 'react-icons/hi';
 
-function TextArea() {
+function TextArea({onUpdate}) {
     function handleclick(){
         console.log(prompt)
         console.log("clicked")
+        onUpdate(prompt)
     }
 const [prompt, setPrompt] = useState('');
   const maxLength = 500;

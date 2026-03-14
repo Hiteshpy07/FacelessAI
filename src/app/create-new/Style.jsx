@@ -2,7 +2,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-function Style() {
+function Style({onUpdate}) {
     const styleoptions=["Realistic","cartoon","comic","watercolor","GTA"]
     const [style,setstyle]=useState('')    
   return (
@@ -17,6 +17,7 @@ function Style() {
                     console.log(e.target.innerHTML)
                     setstyle(e.target.innerHTML)
                     console.log(style)
+                    onUpdate(style)
                 }} >{item}</div>
                 
             )

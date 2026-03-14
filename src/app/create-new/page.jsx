@@ -1,67 +1,159 @@
+// "use client"
+// import React from 'react'
+// import  { useState } from 'react';
+// import { HiChevronDown } from 'react-icons/hi';
+// import TextArea from './TextArea';
+// import Style from './Style';
+// import Duration from './Duration';
+
+
+// function Page() {
+
+//   let [optionselected, setoptionSelected] = useState("Select Project");
+//   let [childdata,setchilddata]=useState('')
+
+//   const options = [
+//     "Custom Prompt",
+//     "Random AI Story",
+//     "Scary Story",
+//     "Historical Facts",
+//     "Bed Time Story",
+//     "Motivational",
+//     "Fun Facts"
+//   ];
+//   console.log(childdata)
+
+
+
+//   return (
+//     <div className='text-white mt-8  ml-4 font-mono'>
+//       <span className='text-xl'>What's your topics?</span>
+//       <div>
+//         <div className="w-full max-w-xs px-4 mt-4 w-full">
+      
+      
+//       <div className="relative group">
+//         {/* The Visual Select Box */}
+//         <select 
+//           onChange={(e) => setoptionSelected(e.target.value)}
+//           className="w-full appearance-none bg-slate-900 border border-slate-800 text-slate-300 py-3 px-4 pr-10 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all hover:bg-slate-800 hover:border-slate-700"
+//         >
+//           {options.map((option, index) => (
+//             <option key={index} value={option} className="bg-slate-900 text-slate-300">
+//               {option}
+//             </option>
+//           ))}
+//         </select>
+
+//         {/* Custom Chevron Icon */}
+//         <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-500 group-hover:text-blue-400 transition-colors">
+//           <HiChevronDown size={20} />
+//         </div>
+//       </div>
+      
+//       {/* Small Hint Text */}
+//       <p className="mt-2 text-[10px] text-slate-600 ml-1">
+//         Selected: <span className="text-blue-500">{optionselected}</span>
+//       </p>
+//     </div>
+//       </div>
+
+//       {optionselected=="Custom Prompt" && //IMPORTANT WAY HWO TO RENDER CONDITIONAL COMPOENTS 
+//       <TextArea/>
+//       }
+
+//       <Style/>
+
+//       <Duration onUpdate={setchilddata}/>
+//     </div>
+//   )
+// }
+
+// export default Page
+
+
+
+
 "use client"
-import React from 'react'
-import  { useState } from 'react';
+import React, { useState } from 'react';
 import { HiChevronDown } from 'react-icons/hi';
 import TextArea from './TextArea';
 import Style from './Style';
-
+import Duration from './Duration';
+import { duration } from 'drizzle-orm/gel-core';
 
 function Page() {
-
-  let [optionselected, setoptionSelected] = useState("Select Project");
+  // 1. Initialize as an object with default values
+  const [childdata, setchilddata] = useState({
+    topic: "Custom Prompt",
+    style: "",
+    duration: 30,
+    customPrompt: ""
+  });
 
   const options = [
-    "Custom Prompt",
-    "Random AI Story",
-    "Scary Story",
-    "Historical Facts",
-    "Bed Time Story",
-    "Motivational",
-    "Fun Facts"
+    "Custom Prompt", "Random AI Story", "Scary Story", 
+    "Historical Facts", "Bed Time Story", "Motivational", "Fun Facts"
   ];
 
+  // 2. A single function to update any specific field in the object
+  const updateField = (key, value) => {
+    setchilddata((prev) => ({
+      ...prev,      // Keep existing fields
+      [key]: value  // Update only the one that changed
+    }));
+  };
 
+  // Log to see the object growing in real-time
+
+  function handlesub(){
+
+    console.log(`Custom AI Prompt for video: create a video on  the topic ${childdata.topic} of style ${childdata.style} and the duration of the video is ${childdata.duration}`);
+  }
 
   return (
-    <div className='text-white mt-8  ml-4 font-mono'>
+    <div className='text-white mt-8 ml-4 font-mono'>
       <span className='text-xl'>What's your topics?</span>
-      <div>
-        <div className="w-full max-w-xs px-4 mt-4 w-full">
       
-      
-      <div className="relative group">
-        {/* The Visual Select Box */}
-        <select 
-          onChange={(e) => setoptionSelected(e.target.value)}
-          className="w-full appearance-none bg-slate-900 border border-slate-800 text-slate-300 py-3 px-4 pr-10 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all hover:bg-slate-800 hover:border-slate-700"
-        >
-          {options.map((option, index) => (
-            <option key={index} value={option} className="bg-slate-900 text-slate-300">
-              {option}
-            </option>
-          ))}
-        </select>
-
-        {/* Custom Chevron Icon */}
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-500 group-hover:text-blue-400 transition-colors">
-          <HiChevronDown size={20} />
+      <div className="w-full max-w-xs px-4 mt-4">
+        <div className="relative group">
+          <select 
+            // Update the 'topic' key in our object
+            onChange={(e) => updateField('topic', e.target.value)}
+            className="w-full appearance-none bg-slate-900 border border-slate-800 text-slate-300 py-3 px-4 pr-10 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all hover:bg-slate-800"
+          >
+            {options.map((option, index) => (
+              <option key={index} value={option}>{option}</option>
+            ))}
+          </select>
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-500 group-hover:text-blue-400">
+            <HiChevronDown size={20} />
+          </div>
         </div>
-      </div>
-      
-      {/* Small Hint Text */}
-      <p className="mt-2 text-[10px] text-slate-600 ml-1">
-        Selected: <span className="text-blue-500">{optionselected}</span>
-      </p>
-    </div>
+        <p className="mt-2 text-[10px] text-slate-600 ml-1">
+          Selected: <span className="text-blue-500">{childdata.topic}</span>
+        </p>
       </div>
 
-      {optionselected=="Custom Prompt" && //IMPORTANT WAY HWO TO RENDER CONDITIONAL COMPOENTS 
-      <TextArea/>
-      }
+      {/* 3. Conditional Rendering */}
+      {childdata.topic === "Custom Prompt" && (
+        <TextArea onUpdate={(val) => updateField('customPrompt', val)} />
+      )}
 
-      <Style/>
-    </div>
+      {/* 4. Passing the update function to other components */}
+      <Style onUpdate={(val) => updateField('style', val)} />
+
+      <Duration onUpdate={(val) => updateField('duration', val)} />
+
+    
+      {/* <div className="mt-10 p-4 bg-black/30 rounded border border-white/10 text-[12px]">
+        <p className="text-yellow-500 font-bold mb-2">// Final Object to be sent to API:</p>
+        <pre>{JSON.stringify(childdata, null, 2)}</pre>
+      </div>*/}
+
+      <button className='mt-3 bg-blue-600 p-2 rounded-xl ml-10 hover:bg-blue-400 hover:cursor-pointer' onClick={handlesub}>Submit</button>
+    </div> 
   )
 }
 
-export default Page
+export default Page;
